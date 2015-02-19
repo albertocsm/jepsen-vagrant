@@ -2,11 +2,11 @@
 # setup virtual network default for five hosts named n1 through n5
 
 
-virsh net-destroy default
-virsh net-undefine default
+sudo virsh net-destroy default
+sudo virsh net-undefine default
 
 # configure virtual network bridge
-cat > /tmp/default.xml <<EOF
+sudo cat > /tmp/default.xml <<EOF
 <network>
   <name>default</name>
   <uuid>5329efc7-b33f-4585-86bf-da9f58952024</uuid>
@@ -30,12 +30,12 @@ cat > /tmp/default.xml <<EOF
 </network>
 EOF
 
-virsh net-define /tmp/default.xml
+sudo virsh net-define /tmp/default.xml
 
 if virsh net-list | grep default > /dev/null 2>&1; then
     echo "virtual network default already started"
 else
     echo "starting virtual network default"
-    virsh net-start default
+    sudo virsh net-start default
 fi
 
