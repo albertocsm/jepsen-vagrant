@@ -39,10 +39,17 @@ function buildbox() {
         echo "container $container already exists"  
         lxc-stop -n $i
     else
-        echo "creating container $container"
+        echo "creating container $container"        
+
         # create box - could clone after the first but it seems that debootstrap caches dloaded
         # stuff so creating is fast anyway
-        MIRROR=http://ftp.fr.debian.org/debian lxc-create -n "$id" -t debian -- -r jessie
+        MIRROR=http://ftp.fr.debian.org/debian lxc-create -n "$id" -t debian -- -r wheezy
+
+        # setup locale
+        locale-gen en_US.UTF-8
+        export LANG=en_US.UTF-8
+        export LANGUAGE=en_US:en
+        export LC_ALL=en_US.UTF-8
     fi
 
     # install iptables for traffic shaping in tests
