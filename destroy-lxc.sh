@@ -1,0 +1,1 @@
+for i in n1 n2 n3 n4 n5; do echo $i; sudo lxc-stop --name $i; sudo lxc-destroy --name $i; done
